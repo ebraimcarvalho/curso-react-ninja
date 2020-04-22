@@ -1,16 +1,7 @@
 import React from 'react'
 
-const Title = ({ color }) => (
-  <div style={{
-    backgroundColor: color,
-    height: '150px',
-    width: '150px'
-  }}
-  /> 
+const Title = ({ children }) => (
+  <button> {children} </button>
 )
-
-Title.defaultProps = {
-  color: 'red'
-}
 
 export default Title
