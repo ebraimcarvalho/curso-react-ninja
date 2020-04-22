@@ -2,14 +2,16 @@
 import Title from './title'
 import React from 'react'
 
-const App = React.createClass({
-  render: function () {
+class App extends React.Component {
+  render () {
     return (
       <div>
-        <Title name='Ebraim Carvalho' />
+        {['blue', 'green', 'pink'].map((item, index) => (
+          <Title key={index} color={item} />
+        ))}
       </div>
     )
   }
-})
+}
 
 export default App

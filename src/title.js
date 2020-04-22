@@ -1,11 +1,16 @@
 import React from 'react'
 
-const Title = (props) => (
-  <p>Hi, {props.name}</p>
+const Title = ({ color }) => (
+  <div style={{
+    backgroundColor: color,
+    height: '150px',
+    width: '150px'
+  }}
+  /> 
 )
 
 Title.defaultProps = {
-  name: 'UEbra!'
+  color: 'red'
 }
 
 export default Title
