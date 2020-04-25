@@ -1,5 +1,6 @@
 'use strict'
 import React from 'react'
+import ajax from '@fdaciuk/ajax'
 import AppContent from './components/app-content'
 
 class App extends React.Component {
@@ -20,7 +21,13 @@ class App extends React.Component {
   }
 
   handleSearch (e) {
-    console.log(e.target.value)
+    const value = e.target.value
+    const keyCode = e.which || e.keyCode
+    const ENTER = 13
+    if (keyCode === ENTER) {
+      ajax().get(`https://api.github.com/users/${value}`)
+        .then(result => console.log(result))
+    }
   }
 
   getRepos (e) {
