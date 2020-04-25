@@ -9,7 +9,8 @@ class App extends React.Component {
     this.state = {
       userInfo: null,
       repos: [],
-      starred: []
+      starred: [],
+      isFetching: false
     }
 
     this.handleSearch = this.handleSearch.bind(this)
@@ -20,6 +21,9 @@ class App extends React.Component {
     const keyCode = e.which || e.keyCode
     const ENTER = 13
     if (keyCode === ENTER) {
+      this.setState({
+        isFetching: true
+      })
       ajax().get(`https://api.github.com/users/${value}`)
         .then(result => {
           this.setState({
@@ -35,6 +39,7 @@ class App extends React.Component {
             starred: []
           })
         })
+        .always(() => this.setState({ isFetching: false }))
         .catch(err => alert('Usuário não encontrado!'))
       e.target.value = ''
     }
@@ -61,6 +66,7 @@ class App extends React.Component {
         <AppContent
           {...this.state}
           repos={this.state.repos}
+          isFetching={this.state.isFetching}
           handleSearch={this.handleSearch}
           getRepos={this.getRepos('repos')}
           getStarred={this.getRepos('starred')}
