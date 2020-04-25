@@ -7,17 +7,12 @@ class App extends React.Component {
   constructor () {
     super()
     this.state = {
-      userInfo: {
-        name: 'Ebra',
-        photo: 'https://avatars1.githubusercontent.com/u/50751483?s=460&u=edece9054d58418afcf976c164fe2daca5962c15&v=4',
-        login: 'https://github.com/ebraimcarvalho',
-        repos: 33,
-        followers: 17,
-        following: 54
-      },
+      userInfo: null,
       repos: [],
       starred: []
     }
+
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   handleSearch (e) {
@@ -26,12 +21,36 @@ class App extends React.Component {
     const ENTER = 13
     if (keyCode === ENTER) {
       ajax().get(`https://api.github.com/users/${value}`)
-        .then(result => console.log(result))
+        .then(result => {
+          this.setState({
+            userInfo: {
+              name: result.name,
+              photo: result.avatar_url,
+              login: result.login,
+              repos: result.public_repos,
+              followers: result.followers,
+              following: result.following
+            },
+            repos: [],
+            starred: []
+          })
+        })
     }
   }
 
-  getRepos (e) {
-    console.log('get repos of type: ')
+  getRepos (type) {
+    return (e) => {
+      const username = this.state.userInfo.login
+      ajax().get(`https://api.github.com/users/${username}/${type}`)
+        .then(result => {
+          this.setState({
+            [type]: result.map(repo => ({
+              name: repo.name,
+              link: repo.html_url
+            }))
+          })
+        })
+    }
   }
 
   render () {
@@ -41,8 +60,8 @@ class App extends React.Component {
           {...this.state}
           repos={this.state.repos}
           handleSearch={this.handleSearch}
-          getRepos={this.getRepos}
-          getStarred={this.getRepos}
+          getRepos={this.getRepos('repos')}
+          getStarred={this.getRepos('starred')}
         />
       </div>
     )
