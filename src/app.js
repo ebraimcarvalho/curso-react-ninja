@@ -35,6 +35,8 @@ class App extends React.Component {
             starred: []
           })
         })
+        .catch(err => alert('Usuário não encontrado!'))
+      e.target.value = ''
     }
   }
 

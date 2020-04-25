@@ -2,7 +2,7 @@ import React from 'react'
 
 const Search = ({ handleSearch }) => {
   return (
-    <div>
+    <div className='search'>
       <input
         type='text'
         placeholder='Digite o nome do usuário'
