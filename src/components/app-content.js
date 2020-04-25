@@ -4,13 +4,13 @@ import UserInfo from './user-info'
 import Actions from './actions'
 import Repos from './repos'
 
-const AppContent = ({ handleSearch }) => {
+const AppContent = ({ userInfo, repos, handleSearch, getRepos, getStarred }) => {
   return (
     <div>
       <Search handleSearch={handleSearch} />
-      <UserInfo />
-      <Actions />
-      <Repos />
+      <UserInfo userInfo={userInfo} />
+      <Actions getRepos={getRepos} getStarred={getStarred} />
+      <Repos repos={repos} />
       <p>Eu sou o app Content</p>
     </div>
   )

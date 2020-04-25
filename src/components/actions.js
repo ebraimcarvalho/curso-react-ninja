@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Actions = () => {
+const Actions = ({ getRepos, getStarred }) => {
   return (
     <div>
-      <button>Repositórios</button>
-      <button>Favoritos</button>
+      <button onClick={getRepos}>Repositórios</button>
+      <button onClick={getStarred}>Favoritos</button>
     </div>
   )
 }
