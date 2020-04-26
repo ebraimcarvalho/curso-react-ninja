@@ -13,7 +13,7 @@ const AppContent = ({ userInfo, repos, isFetching, starred, handleSearch, getRep
       {!!userInfo && <Actions getRepos={getRepos} getStarred={getStarred} />}
 
       {!!repos.length && <Repos title='Repositórios: ' repos={repos} />}
-      {!!starred.length && <Repos title='Favoritos: ' repos={starred} />}
+      {/* {!!starred.length && <Repos title='Favoritos: ' repos={starred} />} */}
       <p>Eu sou o app Content</p>
     </div>
   )

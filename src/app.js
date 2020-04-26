@@ -36,7 +36,7 @@ class App extends React.Component {
               following: result.following
             },
             repos: [],
-            starred: []
+            // starred: []
           })
         })
         .always(() => this.setState({ isFetching: false }))
@@ -51,7 +51,7 @@ class App extends React.Component {
       ajax().get(`https://api.github.com/users/${username}/${type}`)
         .then(result => {
           this.setState({
-            [type]: result.map(repo => ({
+            repos: result.map(repo => ({
               name: repo.name,
               link: repo.html_url
             }))
@@ -65,8 +65,6 @@ class App extends React.Component {
       <div>
         <AppContent
           {...this.state}
-          repos={this.state.repos}
-          isFetching={this.state.isFetching}
           handleSearch={this.handleSearch}
           getRepos={this.getRepos('repos')}
           getStarred={this.getRepos('starred')}
