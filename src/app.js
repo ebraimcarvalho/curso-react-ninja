@@ -9,7 +9,7 @@ class App extends React.Component {
     this.state = {
       userInfo: null,
       repos: [],
-      starred: [],
+      typeRepo: '',
       isFetching: false
     }
 
@@ -35,8 +35,7 @@ class App extends React.Component {
               followers: result.followers,
               following: result.following
             },
-            repos: [],
-            // starred: []
+            repos: []
           })
         })
         .always(() => this.setState({ isFetching: false }))
@@ -47,6 +46,9 @@ class App extends React.Component {
 
   getRepos (type) {
     return (e) => {
+      this.setState({
+        typeRepo: type
+      })
       const username = this.state.userInfo.login
       ajax().get(`https://api.github.com/users/${username}/${type}`)
         .then(result => {
