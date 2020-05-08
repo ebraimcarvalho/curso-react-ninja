@@ -35,4 +35,37 @@ describe('Todo', () => {
     ]
     expect(todos(before, action)).toEqual(after)
   })
+
+  test('should Toggle second Todo', () => {
+    const before = [
+      { id: 0, text: 'Hey!', completed: false },
+      { id: 1, text: 'Ho!', completed: false }
+    ]
+    const action = { type: TOGGLE_TODO, payload: { id: 1 } }
+    const after = [
+      { id: 0, text: 'Hey!', completed: false },
+      { id: 1, text: 'Ho!', completed: true }
+    ]
+    expect(todos(before, action)).toEqual(after)
+  })
+
+  test('should Toggle second Todo', () => {
+    const before = [
+      { id: 0, text: 'Hey!', completed: true },
+      { id: 1, text: 'Ho!', completed: false }
+    ]
+    const action = { type: TOGGLE_TODO, payload: { id: 0 } }
+    const after = [
+      { id: 0, text: 'Hey!', completed: false },
+      { id: 1, text: 'Ho!', completed: false }
+    ]
+    expect(todos(before, action)).toEqual(after)
+  })
+
+  test('should return initialState when state before is undefined', () => {
+    const before = undefined
+    const action = { type: 'ANY' }
+    const after = initialState
+    expect(todos(before, action)).toEqual(after)
+  })
 })
