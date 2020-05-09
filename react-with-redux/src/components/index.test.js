@@ -68,4 +68,12 @@ describe('Todo', () => {
     const after = initialState
     expect(todos(before, action)).toEqual(after)
   })
+
+  test('should return the latest state when action is unknown', () => {
+    const before = [{ id: 0, text: 'Hey', completed: false }]
+    const action = { type: 'ANYTHING' }
+    const after = [{ id: 0, text: 'Hey', completed: false }]
+  
+    expect(todos(before, action)).toEqual(after)
+  })
 })
